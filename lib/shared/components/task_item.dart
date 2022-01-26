@@ -37,9 +37,9 @@ class TaskItem extends StatelessWidget {
         actions: [
           IconSlideAction(
             closeOnTap: true,
-            caption: 'Delete',
+            caption: AppCubit.get(context).getTexts('delete').toString(),
             color: Colors.red,
-            icon: Icons.delete,
+            icon: Icons.delete_forever,
             onTap: () {
               AppCubit.get(context).deleteFromDatabase(tasks!['id']);
             },
@@ -47,10 +47,11 @@ class TaskItem extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.only(
                 topRight: Radius.circular(15),
+              
                 bottomRight: Radius.circular(15)),
             child: IconSlideAction(
               closeOnTap: true,
-              caption: 'Archive',
+              caption: AppCubit.get(context).getTexts('archive').toString(),
               color: Colors.grey[800],
               icon: Icons.archive,
               onTap: () {
@@ -66,17 +67,20 @@ class TaskItem extends StatelessWidget {
             child: tasks!['status'] == 'archived' || tasks!['status'] == 'done'
                 ? IconSlideAction(
                     closeOnTap: true,
-                    caption: 'Add',
+                    caption: AppCubit.get(context)
+                        .getTexts('add_to_task')
+                        .toString(),
                     color: Colors.deepOrange,
-                    icon: Icons.add,
+                    icon: Icons.add_box,
                     onTap: () {
                       AppCubit.get(context).updateDatabase('New', tasks!['id']);
                     },
                   )
                 : IconSlideAction(
                     closeOnTap: true,
-                    caption: 'Done',
-                    color: Colors.green,
+                    caption:
+                        AppCubit.get(context).getTexts('done_tasks').toString(),
+                    color: Colors.deepOrange,
                     icon: Icons.check_circle,
                     onTap: () {
                       AppCubit.get(context)
